@@ -1,0 +1,16 @@
+[Unit]
+Description=USB-IP connect on %I (Hostname or ip)
+After=network-online.target usbipd.service
+Wants=network-online.target
+Requires=usbipd.service
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /etc/usbip/usbip-connect.sh %i
+RemainAfterExit=yes
+ExecStop=/bin/bash /etc/usbip/usbip-disconnect.sh %i
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+

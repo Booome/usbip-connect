@@ -10,8 +10,8 @@ get_id_list() {
 }
 
 delete_old_port() {
+    # don't assign id will remove all ports under HOSTNAME
     local id=$1
-    [ -z "$id" ] && id='.*'
 
     old_ports=$(usbip port | grep -B2 "\-> usbip://${HOSTNAME}:3240/$id" | \
         grep '^Port' | cut -d' ' -f 2 | cut -d':' -f1)
